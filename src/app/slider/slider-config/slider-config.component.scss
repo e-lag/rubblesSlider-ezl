@@ -1,0 +1,26 @@
+.config-box {
+
+
+  ::ng-deep.mat-form-field-flex {
+    background-color: white;
+    border-radius: 6px;
+  }
+  ::ng-deep.mat-form-field-underline {
+    margin-left: 3px;
+    position: absolute;
+    width: 98%;
+  }
+  ::ng-deep.mat-input-element {
+    margin-left: 4px;
+    width: 98%;
+  }
+  ::ng-deep.mat-form-field-label {
+    margin-left: 5px;
+  }
+  .cntr-radius-suffix{
+    padding: 11px 5px 4px 5px;
+    opacity: 0.5;
+    font-size: 25px;
+    border-left: #333333 solid 1px;
+  }
+}
