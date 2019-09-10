@@ -1,40 +1,66 @@
-import {UnsplashService} from './Unsplash.service';
+import {UnsplashService} from './unsplash.service';
 import {Injectable} from '@angular/core';
-import {SlideImage} from './slide.interfaces';
-import {HttpClient} from '@angular/common/http';
 
 @Injectable()
 export class SlideService {
-  public borderRadius: string = '3px';
-  public images: SlideImage[] = [];
+  public borderRadius = '30px';
+  public squareSize = '150px';
+  public images: string[];
+  public showImageIndex = 0;
 
-  constructor(private _unsplashSrv: UnsplashService, private httpClient: HttpClient) {
+  constructor(private _unsplashSrv: UnsplashService) {
   }
 
   public setBorderRadius(radius: number) {
-    if (radius && radius >= 0 && radius < 50) {
-      this.borderRadius = radius.toString() + 'px';
-    }
+    this.borderRadius = radius.toString() + 'px';
+  }
+
+  public setSquareSize(size: number) {
+    this.squareSize = size.toString() + 'px';
   }
 
   public setImageCount(countImg: number) {
-    this.images = Array.from<SlideImage>({length: countImg});
-    this._parseImages();
+    this.images = Array.from<string>({length: countImg});
+    this._getImages();
   }
 
   public addImageItem() {
-    console.warn('addImageItem');
     this.images = [null, ...this.images];
-    this._parseImages();
+    this._getImages();
   }
 
-  private _parseImages() {
-    const url = 'https://unsplash.com/napi/photos?page=1&per_page=' + this.images.length;
-    this.httpClient.get(url).subscribe(result => {
-      console.log({result})
-      this.images.map(image => result['urls']['regular']);
-    });
+  private _getImages() {
+    this._unsplashSrv
+      .getImages(this.images.filter(imgFi => !imgFi).length)
+      .subscribe(unsplashImages => this._setImages(unsplashImages));
+  }
+
+  private _setImages(unsplashImages) {
+    let insImg = 0;
+    this.images = [...this.images.map(image => {
+      if (!image) {
+        return unsplashImages[insImg++];
+      }
+      return image;
+    })];
 
 
+  }
+
+
+  public showPrev() {
+    if (this.showImageIndex > 0) {
+      this.showImageIndex--;
+    } else {
+      this.showImageIndex = 0;
+    }
+  }
+
+  public showNext() {
+    if (this.showImageIndex + 1 < this.images.length) {
+      this.showImageIndex++;
+    } else {
+      this.showImageIndex = this.images.length - 1;
+    }
   }
 }

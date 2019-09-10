@@ -4,8 +4,7 @@ import {SlideService} from './services/slide.service';
 
 @Component({
   selector: 'rub-slider',
-  templateUrl: './slider.component.html',
-  styleUrls: ['./slider.component.scss']
+  templateUrl: './slider.component.html'
 })
 export class SliderComponent implements OnInit {
 

@@ -1,16 +1,16 @@
-<div class="config-box"fxLayout="column" fxLayoutAlign="start stretch" fxLayoutGap="0.5rem">
+<div class="config-box" fxLayout="column" fxLayoutAlign="start stretch" fxLayoutGap="0.5rem">
   <div fxFlex="50px"></div>
   <mat-form-field>
-    <input matInput  type="number"  min="0" max="90" placeholder="size">
+    <input matInput type="number" min="30" max="890" placeholder="size" [formControl]="squareSize">
   </mat-form-field>
   <mat-form-field>
-    <input type="number" min="0" max="90" matInput placeholder="counter radius">
+    <input type="number" min="0" [max]="squareSize.value/2" matInput placeholder="counter radius"
+           [formControl]="borderRadius">
     <span matSuffix class="cntr-radius-suffix">PX</span>
   </mat-form-field>
-    <button mat-raised-button (click)="addImageSqyare()">ADD SQUARE</button>
-    <div fxLayout="row" fxLayoutGap="0.5rem">
-      <button mat-raised-button fxFlex="auto">PREV</button>
-      <button mat-raised-button fxFlex="auto">NEXT</button>
-
-    </div>
+  <button mat-raised-button (click)="addImageSqyare()">ADD SQUARE</button>
+  <div fxLayout="row" fxLayoutGap="0.5rem">
+    <button mat-raised-button fxFlex="auto" (click)="showPrev()">PREV</button>
+    <button mat-raised-button fxFlex="auto" (click)="showNext()">NEXT</button>
   </div>
+</div>

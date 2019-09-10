@@ -4,4 +4,23 @@
   padding: 0.5rem;
   max-height: 600px;
   height: 600px;
+  overflow: hidden;
+  border-radius: 30px;
+
+  .img-pre-wrapper {
+    position: relative;
+    .img-wrapper {
+      overflow: hidden;
+      position: relative;
+
+      .image-item {
+        background-color: #fff;
+        min-width: 100%;
+        min-height: inherit;
+        position: relative;
+        width: 100%;
+        object-fit: cover;
+      }
+    }
+  }
 }

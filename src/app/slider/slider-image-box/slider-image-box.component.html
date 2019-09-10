@@ -1,3 +1,16 @@
-<div class="image-box" [ngStyle]="{borderRadius:slideSrv.borderRadius}"  >
-<pre>{{slideSrv.images|json}}</pre>
+<div class="image-box" fxLayout="row" fxLayoutAlign="center center">
+  <div class="slider-container" fxLayout="row" fxLayoutAlign="start center" fxFlex="100">
+    <ng-container *ngFor="let image of slideSrv.images;let imgIdx = index">
+      <div *ngIf="imgIdx>= slideSrv.showImageIndex&&imgIdx< slideSrv.showImageIndex+10"
+           @showHideBoxTrigger class="img-pre-wrapper">
+        <div class="img-wrapper" [ngStyle]="{borderRadius:slideSrv.borderRadius,
+             minWidth:slideSrv.squareSize, minHeight:slideSrv.squareSize,
+             maxWidth:slideSrv.squareSize, maxHeight:slideSrv.squareSize}">
+          <img [src]="image" alt="" class="image-item"
+               [@imageBoxOpacity]=" (imgIdx - slideSrv.showImageIndex).toString()">
+
+        </div>
+      </div>
+    </ng-container>
+  </div>
 </div>
